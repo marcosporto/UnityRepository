@@ -6,7 +6,8 @@ using UnityEngine.UI; // Importado
 
 public class Selecao : MonoBehaviour {
 
-    public Toggle selecionado;
+    public Toggle selecaoNome;
+    public InputField digitacaoNome;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +19,15 @@ public class Selecao : MonoBehaviour {
 		
 	}
 
-    public void Selecionado() {
+    public void status() {
+
+        if (selecaoNome.isOn == true) {
+            digitacaoNome.readOnly = false;
+            Debug.Log("Ativo");
+        } else {
+            digitacaoNome.readOnly = true;
+            Debug.Log("Desativado");
+        }
 
 
     }
