@@ -9,7 +9,7 @@ public class Movimento : MonoBehaviour {
     private Rigidbody2D myRigidBody;
     private SpriteRenderer personagem;
     private float horizontal;
-    private bool direita;
+    private bool facingRight; // Virado para a direita
 
     [SerializeField]
     private float movimentSpeed;
@@ -18,8 +18,8 @@ public class Movimento : MonoBehaviour {
 	void Start () {
 
         myRigidBody = GetComponent<Rigidbody2D>();
-        personagem = GetComponent<SpriteRenderer>();
-        direita = true;
+        //personagem = GetComponent<SpriteRenderer>();
+        facingRight = true;
 	}
 	
 	// Update is called once per frame
@@ -36,15 +36,14 @@ public class Movimento : MonoBehaviour {
 
         // Faz que o personagem se movimente para direita e esquerda
         myRigidBody.velocity = new Vector2(horizontal * movimentSpeed, myRigidBody.velocity.y);
-
-        if (direita == false) {
-           
-        } else {
-            personagem.flipX = direita;
-            direita = !direita;
-        }
-
         Debug.Log(myRigidBody.velocity);
+
+    }
+
+    void Flip(float horizontal) {
+        if(horizontal > 0 && !facingRight) {
+            facingRight = !facingRight;
+        }
 
     }
 }
