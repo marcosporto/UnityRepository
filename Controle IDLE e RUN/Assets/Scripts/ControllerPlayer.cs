@@ -15,9 +15,12 @@ public class ControllerPlayer : MonoBehaviour {
     public  float       speed;              // Velocidade do personagem.
     public  float       direcao;            // Direção que o personagem está indo.
 
-    // Variávies usadas para controle do pulo
-    public bool         jump = false;
-    public float        jumpForce;
+    // Variáveis usadas para controle do pulo
+    public  bool         jump = false;
+    public  float        jumpForce;
+    public  int          numberJumps = 0;
+    public  int          maxJumps = 2;
+
 
 	// Use this for initialization
 	void Start () {
@@ -45,10 +48,10 @@ public class ControllerPlayer : MonoBehaviour {
             Debug.Log("Personagem andando para esquerda: " + direcao);
 
         ExecutaMovimentos();
-
-        if (Input.GetButtonDown("jump")) {
-
-            jump = true; 
+        // Captura o pressionemento da barra de espaço e pula
+        // && isGrounded
+        if (Input.GetButtonDown("Jump")) {
+            jump = true;
         }
     }
 
@@ -62,10 +65,19 @@ public class ControllerPlayer : MonoBehaviour {
 
     private void JumpPlayer() {
 
-        playerRigidbody2D.AddForce(new Vector2(0f, jumpForce));
-        isGrounded = false;
-        jump       = false;
+        // Se o personagem estiver no chão o número de pulos é zerado
+        if (isGrounded) {
+            numberJumps = 0;
+        }
 
+        if(isGrounded || numberJumps < maxJumps) {
+
+            // Adiciona uma força para realizar o pulo
+            playerRigidbody2D.AddForce(new Vector2(0f, jumpForce));
+            isGrounded = false; // O personagem não está no chão, ou seja, está pulando
+            numberJumps++;
+        }
+        jump = false; 
     }
 
     void Flip() {
@@ -77,8 +89,10 @@ public class ControllerPlayer : MonoBehaviour {
 
     void ExecutaMovimentos() {
 
-        playerAnimator.SetBool("run", !isGrounded);
-        // Seta detro do parâmetro do Animator o valor true ou false, onde a variável playerRigidbody2D verifica se o personagem está parado e no chão
+        // Seta dentro do parâmetro do Animator o valor true ou false,
+        // dependendo das transições das animações executadas
+        playerAnimator.SetBool("jump", !isGrounded);
+        // Seta dentro do parâmetro do Animator o valor true ou false, onde a variável playerRigidbody2D verifica se o personagem está parado e no chão
         playerAnimator.SetBool("run", playerRigidbody2D.velocity.x != 0 && isGrounded);
     }
 
