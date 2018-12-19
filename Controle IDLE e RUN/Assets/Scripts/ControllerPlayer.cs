@@ -88,7 +88,8 @@ public class ControllerPlayer : MonoBehaviour {
     }
 
     void ExecutaMovimentos() {
-
+        // 
+        playerAnimator.SetFloat("velocidadeY", playerRigidbody2D.velocity.y);
         // Seta dentro do parâmetro do Animator o valor true ou false,
         // dependendo das transições das animações executadas
         playerAnimator.SetBool("jump", !isGrounded);
