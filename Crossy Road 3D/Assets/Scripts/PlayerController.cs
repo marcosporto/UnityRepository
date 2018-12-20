@@ -4,29 +4,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public Animation playerAnimator;
+    public Animator playerAnimator;
 
     public float    moveDistance;   // Distância a ser movida
     public float    moveSpeed;      // Velocidade do movimento
     public bool     isIdle;         // Indica se o personagem está parado
     public bool     isDead;         // Indica se o personagem está morto
     public bool     isMoving;       // Indica se o personagem está se movendo
+    public bool     isCanMove;      // Indica se pode se mover
     public bool     jumpStart;      // Indica o início do pulo
     public bool     isJumping;      // Indica se o personagem está pulando
 
     public Vector3 target;          // Armazena o destino do movimento          
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Update () {
 
         canIdle();
         CanMove();
         Moving();
+        AnimatorController();
 	}
 
     void canIdle() {
@@ -38,7 +34,6 @@ public class PlayerController : MonoBehaviour {
 
                 checkIfCanMove();
             }
-            print("Testou IsIdle");
         }
     }
 
@@ -46,27 +41,25 @@ public class PlayerController : MonoBehaviour {
     void checkIfCanMove() {
 
         // Fazer o teste de reyCaste para verificar possíveis obstáculos
-        print("Verificou se pode mover");
         setMove();
     }
 
     void setMove() {
 
-        isIdle = false;
-        isMoving = true;
-
-        print("Definiu Movimento");
+        isIdle = false;     // Desabilita a entrada de dados via teclas direcionais
+        isCanMove = true;   // Habilita método que vai capturar tecla direcional clicada
+        jumpStart = true;   // Habilita o pulo
     }
 
     // Método responsável por atribuir via teclas direcionais o movimento ao player
     void CanMove() {
 
-        if (isMoving) {
+        if (isCanMove) { 
 
             // Ao soltar a telca de seta para cima
             if (Input.GetKeyUp(KeyCode.UpArrow)) {
                 // target recebe um vetor 3, onde a posição do y é aumentada pelo valor da variável moveDistance
-                target = new Vector3(transform.position.x, transform.position.y, transform.position.z + moveDistance);
+                target = new Vector3(transform.position.x, transform.position.y, transform.position.z + moveDistance);                
             }
             // Ao apertar seta para baixo
             else if (Input.GetKeyUp(KeyCode.DownArrow)) {
@@ -81,11 +74,16 @@ public class PlayerController : MonoBehaviour {
             // Ao apertar seta para direita
             else if (Input.GetKeyUp(KeyCode.RightArrow)) {
                 // target recebe um vetor 3, onde a posição do x é aumentada pelo valor da variável moveDistance
-                target = new Vector3(transform.position.x + moveDistance, transform.position.y, transform.position.z);
+                target = new Vector3(transform.position.x + moveDistance, transform.position.y, transform.position.z);                
             }
-            print("Pode Mover");
-            //isIdle = true;
-            //isMoving = false;
+            // Ao soltar uma das teclas direcionais 
+            if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
+
+                jumpStart = false;
+                isJumping = true;
+                isMoving = true; // Define que o movimento do player pode ser executado
+                isCanMove = false; // Desabilita método que vai capturar tecla direcional clicada 
+            }
         }
     }
 
@@ -105,7 +103,21 @@ public class PlayerController : MonoBehaviour {
 
     void MoveComplete() {
 
-        isIdle = true;
-        isMoving = false;
+        isIdle = true;      // Habilita a entrada de dados via teclas direcionais
+        isMoving = false;   // Inabilita o movimento do player
+        isJumping = false;
+    }
+
+    void AnimatorController() {
+
+        if (Input.GetKeyDown(KeyCode.UpArrow)) { transform.rotation = Quaternion.Euler(0, 0, 0); }
+        else if (Input.GetKeyDown(KeyCode.RightArrow)) { transform.rotation = Quaternion.Euler(0, 90, 0); }
+        else if (Input.GetKeyDown(KeyCode.DownArrow)) { transform.rotation = Quaternion.Euler(0, 180, 0); }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)) { transform.rotation = Quaternion.Euler(0, -90, 0); }
+
+        playerAnimator.SetBool("dead", isDead);
+        playerAnimator.SetBool("preJump", jumpStart);
+        playerAnimator.SetBool("jump", isJumping);
+
     }
 }

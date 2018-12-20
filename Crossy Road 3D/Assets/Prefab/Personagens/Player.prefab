@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1394150002939302}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1394150002939302
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4296870044632740}
   - component: {fileID: 54163562471074068}
@@ -32,15 +32,16 @@ GameObject:
 --- !u!1 &1499359395688872
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4993069046613726}
   - component: {fileID: 33333587037780860}
   - component: {fileID: 23880357050653822}
+  - component: {fileID: 95460529424221272}
   m_Layer: 0
-  m_Name: default
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +50,7 @@ GameObject:
 --- !u!4 &4296870044632740
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1394150002939302}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
@@ -63,7 +64,7 @@ Transform:
 --- !u!4 &4993069046613726
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1499359395688872}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
@@ -76,7 +77,7 @@ Transform:
 --- !u!23 &23880357050653822
 MeshRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1499359395688872}
   m_Enabled: 1
@@ -111,14 +112,14 @@ MeshRenderer:
 --- !u!33 &33333587037780860
 MeshFilter:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1499359395688872}
   m_Mesh: {fileID: 4300000, guid: 049c6d8e5e14c9049a14875f81bf8cc9, type: 3}
 --- !u!54 &54163562471074068
 Rigidbody:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1394150002939302}
   serializedVersion: 2
@@ -133,7 +134,7 @@ Rigidbody:
 --- !u!65 &65882951289089864
 BoxCollider:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1394150002939302}
   m_Material: {fileID: 0}
@@ -142,10 +143,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12, y: 12, z: 12}
   m_Center: {x: 0, y: 6, z: 0}
+--- !u!95 &95460529424221272
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1499359395688872}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3fb63bca19ede1246983cb4b2f39d9f5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114143693796689522
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1394150002939302}
   m_Enabled: 1
@@ -153,12 +172,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc43e0a147610749a61d249f3bbeaaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnimator: {fileID: 0}
+  playerAnimator: {fileID: 95460529424221272}
   moveDistance: 20
   moveSpeed: 1.5
-  isIdle: 0
+  isIdle: 1
   isDead: 0
-  isMove: 0
+  isMoving: 0
+  isCanMove: 0
   jumpStart: 0
   isJumping: 0
   target: {x: 0, y: 20, z: 0}
