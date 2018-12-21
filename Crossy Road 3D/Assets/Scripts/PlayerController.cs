@@ -19,12 +19,14 @@ public class PlayerController : MonoBehaviour {
 
     void Update () {
 
+        AnimatorController(); 
         canIdle();
         CanMove();
         Moving();
-        AnimatorController();
+        
 	}
 
+    // Método que aguarda pressionar as teclas de movietno enquanto o personagem está parado
     void canIdle() {
 
         if (isIdle) { // Realiza o teste abaixo somente se o player estiver parado
@@ -38,10 +40,32 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Método que verifica se o personagem pode se mover
+    // Verifica se há obstáculo para permitir o movimento do personagem ou não
     void checkIfCanMove() {
 
         // Fazer o teste de reyCaste para verificar possíveis obstáculos
-        setMove();
+        RaycastHit hit;
+        Physics.Raycast(new Vector3(
+            transform.position.x,       // Posição inicial de partida do raio, definida pelo Vector3
+            transform.position.y + 5,
+            transform.position.z),
+            transform.forward,          // Direção para onde o raio vai apontar (eixo azul)
+            out hit,                    // Local onde o rayCast será armazenado, ou seja, variável hit
+            moveDistance);              // Tamanho do raio
+        // Desenhando o RayCast para ser visível
+        Debug.DrawRay(new Vector3(
+            transform.position.x, transform.position.y + 5, transform.position.z),
+            transform.forward * moveDistance, //Direção do raio e tamanho
+            Color.red, // Cor do raio
+            2); //Tempo de duração do raio
+
+        // Testa se há obstáculos à frente do pesonagem, se não hover é chamado do método para realizar o movimento
+        if (hit.collider == null) { setMove(); }
+        else if(hit.collider.tag != "collider") { setMove(); }
+        else { print("Há obstáculo"); }
+
+
+        
     }
 
     void setMove() {
@@ -54,7 +78,7 @@ public class PlayerController : MonoBehaviour {
     // Método responsável por atribuir via teclas direcionais o movimento ao player
     void CanMove() {
 
-        if (isCanMove) { 
+        if (isCanMove && !isDead) { 
 
             // Ao soltar a telca de seta para cima
             if (Input.GetKeyUp(KeyCode.UpArrow)) {
@@ -108,16 +132,43 @@ public class PlayerController : MonoBehaviour {
         isJumping = false;
     }
 
+    // Chamada quando o personagem morre
+    void gotHit() {
+        isDead = true;
+    }
+
     void AnimatorController() {
 
-        if (Input.GetKeyDown(KeyCode.UpArrow)) { transform.rotation = Quaternion.Euler(0, 0, 0); }
-        else if (Input.GetKeyDown(KeyCode.RightArrow)) { transform.rotation = Quaternion.Euler(0, 90, 0); }
-        else if (Input.GetKeyDown(KeyCode.DownArrow)) { transform.rotation = Quaternion.Euler(0, 180, 0); }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow)) { transform.rotation = Quaternion.Euler(0, -90, 0); }
-
+        if (!isDead) { 
+            if (Input.GetKeyDown(KeyCode.UpArrow)) { transform.rotation = Quaternion.Euler(0, 0, 0); }
+            else if (Input.GetKeyDown(KeyCode.RightArrow)) { transform.rotation = Quaternion.Euler(0, 90, 0); }
+            else if (Input.GetKeyDown(KeyCode.DownArrow)) { transform.rotation = Quaternion.Euler(0, 180, 0); }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow)) { transform.rotation = Quaternion.Euler(0, -90, 0); }
+        }
         playerAnimator.SetBool("dead", isDead);
         playerAnimator.SetBool("preJump", jumpStart);
         playerAnimator.SetBool("jump", isJumping);
 
+    }
+
+    // Ao entrar em colisão é ativado, capturando o collider do objeto que recebeu à colisão
+    private void OnTriggerEnter(Collider coliderDoObjetoCorrente) {
+
+        switch (coliderDoObjetoCorrente.tag) {
+            case "moeda":
+                print("Peguei uma moeda!");
+                Destroy(coliderDoObjetoCorrente.gameObject);
+                break;
+
+            case "tomate":
+                print("Peguei um tomate!");
+                Destroy(coliderDoObjetoCorrente.gameObject);
+                break;
+
+            case "hit":
+                print("Morreu");
+                gotHit();
+                break;
+        }
     }
 }

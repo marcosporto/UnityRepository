@@ -7,7 +7,10 @@ TagManager:
   - agua
   - chegada
   - collider
+  - moeda
+  - tomate
   - coletavel
+  - hit
   layers:
   - Default
   - TransparentFX
