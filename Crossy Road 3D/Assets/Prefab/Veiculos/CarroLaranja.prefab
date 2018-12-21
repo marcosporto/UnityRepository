@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4494145075089534}
   - component: {fileID: 65995882272032276}
+  - component: {fileID: 114870193789110428}
   m_Layer: 0
   m_Name: CarroLaranja
   m_TagString: hit
@@ -125,3 +126,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 35, y: 20, z: 20}
   m_Center: {x: 0, y: 10, z: 0}
+--- !u!114 &114870193789110428
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1383271356969866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7b94c5a75af504da02cb274189b73c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4908283374929608}
   - component: {fileID: 65045882726322050}
+  - component: {fileID: 114397244048942724}
   m_Layer: 0
   m_Name: CaminhaoSemBauAzul
   m_TagString: hit
@@ -125,3 +126,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 40, y: 20, z: 20}
   m_Center: {x: 0, y: 10, z: 0}
+--- !u!114 &114397244048942724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1639847077079946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7b94c5a75af504da02cb274189b73c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0

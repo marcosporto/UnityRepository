@@ -53,6 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4215444192657896}
   - component: {fileID: 65698771562051702}
+  - component: {fileID: 114050956643895370}
   m_Layer: 0
   m_Name: Trem
   m_TagString: hit
@@ -470,3 +471,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 40, y: 20, z: 20}
   m_Center: {x: 0, y: 10, z: 0}
+--- !u!114 &114050956643895370
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1321939360619538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7b94c5a75af504da02cb274189b73c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
