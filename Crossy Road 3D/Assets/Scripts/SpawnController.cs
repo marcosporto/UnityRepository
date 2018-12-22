@@ -36,7 +36,9 @@ public class SpawnController : MonoBehaviour {
                 veiculos[id], // Posição que será pega
                 transform.position, // Posição que está
                 transform.rotation); // Rotação que está
-                                     // Captura o script Mover e atribui seta um valor para variável moveSpeed
+            // Faz com que os veículos spawnados sejam filhos do objeto que está spawnando esses objetos
+            tempVeiculo.transform.parent = transform;
+            // Captura o script Mover e atribui seta um valor para variável moveSpeed
             tempVeiculo.GetComponent<Mover>().moveSpeed = moveSpeed;
             // Rotaciona o objeto em 180, virando assim, ele para o outro lado
             if (esquerda) { tempVeiculo.transform.rotation = Quaternion.Euler(0, 180, 0); }
