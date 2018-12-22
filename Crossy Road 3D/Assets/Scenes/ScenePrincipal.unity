@@ -1238,6 +1238,7 @@ GameObject:
   - component: {fileID: 282840814}
   - component: {fileID: 282840813}
   - component: {fileID: 282840811}
+  - component: {fileID: 282840812}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1252,6 +1253,24 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 282840810}
   m_Enabled: 1
+--- !u!114 &282840812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 282840810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ddbe94f737a2a04c9150335d8e7e0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 329620434}
+  moveSpeedCamera: 1
+  posicaoInicialDaCamera: {x: 40, y: 60, z: -50}
+  rotacaoX: 25
+  rotacaoY: -35
+  follow: 1
+  tamanhoDaCamera: 45
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
@@ -1275,8 +1294,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 45
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1298,13 +1317,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 282840810}
-  m_LocalRotation: {x: 0.31595784, y: -0, z: -0, w: 0.94877326}
-  m_LocalPosition: {x: -1.5, y: 91.9, z: -40.06}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 36.837, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &305273594
 Prefab:
   m_ObjectHideFlags: 0
@@ -1356,6 +1375,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4657670765890360, guid: 5148ac769f71c4f4b92a00dde9ae7036,
     type: 2}
   m_PrefabInternal: {fileID: 305273594}
+--- !u!4 &329620434 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4296870044632740, guid: 231751b64ee847946ab886d66d607ea9,
+    type: 2}
+  m_PrefabInternal: {fileID: 275118974}
 --- !u!1001 &341848685
 Prefab:
   m_ObjectHideFlags: 0
