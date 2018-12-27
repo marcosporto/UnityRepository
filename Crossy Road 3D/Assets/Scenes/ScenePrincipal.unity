@@ -2093,6 +2093,12 @@ MonoBehaviour:
   moedasColetadas: 0
   tomatesColetados: 0
   precoPersonagem: 0
+  skimPersonagem:
+  - {fileID: 4300000, guid: 049c6d8e5e14c9049a14875f81bf8cc9, type: 3}
+  - {fileID: 4300000, guid: c347a7fb07e781f46bc9855fdeb09bff, type: 3}
+  - {fileID: 4300000, guid: e552dc7b295fe554492e7b10432526ef, type: 3}
+  - {fileID: 4300000, guid: 8c12e7d490dd82e41a9766f93639f71d, type: 3}
+  - {fileID: 4300000, guid: cf949acd4bac2564eab1015ac6e32981, type: 3}
 --- !u!224 &353388740
 RectTransform:
   m_ObjectHideFlags: 0

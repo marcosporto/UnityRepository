@@ -26,10 +26,24 @@ public class Manager : MonoBehaviour {
     public int moedas, fase, moedasMapa, tomatesMapa, tempo, moedasColetadas, tomatesColetados, precoPersonagem;
 
 
+    [Header("Seleção Personagem")]
+    public Mesh[] skimPersonagem; // Usado para realizar às mudanças de skins dos personagens
+    private MeshFilter meshPersonagem; // Usado para trabalhar com malhas
+    private int idPersonagem; // Os ids determinam qual personagem foi escolhido
+
+
+
     // Use this for initialization
     void Start () {
 
         player = FindObjectOfType(typeof(PlayerController)) as PlayerController;
+
+        meshPersonagem = player.GetComponentInChildren<MeshFilter>(); // Acessando o Mesh Filter do personagem
+
+        // Captura o id que vinculado à skim que foi salva anteriormente, no momento de escolha das skins
+        idPersonagem = PlayerPrefs.GetInt("idPersonagemAtual");
+
+        meshPersonagem.mesh = skimPersonagem[idPersonagem]; // Seta uma nova skim para o personagem
 
         print("Início do Switch!");
         switch (currentState) {
@@ -67,6 +81,13 @@ public class Manager : MonoBehaviour {
                 hudLoading.SetActive(true); // Ativa a tela de loading
                 // Carrega a cena principal do game
                 SceneManager.LoadSceneAsync("ScenePrincipal");
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow)) {
+                selecionarPersonagem(1);
+
+            } else if (Input.GetKeyDown(KeyCode.LeftArrow)){
+                selecionarPersonagem(-1);
             }
         }
 		
@@ -135,6 +156,20 @@ public class Manager : MonoBehaviour {
 
         // Fecha a aplicação
         Application.Quit();
+    }
+
+    void selecionarPersonagem(int i) {
+
+        idPersonagem += i;
+
+        if (idPersonagem >= skimPersonagem.Length) { idPersonagem = 0;   }
+        else if(idPersonagem < 0) { idPersonagem = skimPersonagem.Length - 1; }
+
+        meshPersonagem.mesh = skimPersonagem[idPersonagem];
+
+        // Grava internamente o valor inteiro passado na variável chamada idPersonagemAtual
+        PlayerPrefs.SetInt("idPersonagemAtual", idPersonagem);
+        
     }
 
 
