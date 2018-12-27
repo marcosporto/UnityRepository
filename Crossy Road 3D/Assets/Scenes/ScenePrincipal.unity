@@ -2099,6 +2099,7 @@ MonoBehaviour:
   - {fileID: 4300000, guid: e552dc7b295fe554492e7b10432526ef, type: 3}
   - {fileID: 4300000, guid: 8c12e7d490dd82e41a9766f93639f71d, type: 3}
   - {fileID: 4300000, guid: cf949acd4bac2564eab1015ac6e32981, type: 3}
+  precoCharacter: 00000000960000002c010000c201000058020000
 --- !u!224 &353388740
 RectTransform:
   m_ObjectHideFlags: 0

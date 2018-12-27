@@ -17,7 +17,7 @@ public enum GameState {
 
 public class Manager : MonoBehaviour {
 
-    private PlayerController player; // Objeto criado para acessar o script PlayerControlle
+    private PlayerController playerController; // Objeto criado para acessar o script PlayerControlle
 
     public GameState currentState;
 
@@ -28,6 +28,9 @@ public class Manager : MonoBehaviour {
 
     [Header("Seleção Personagem")]
     public Mesh[] skimPersonagem; // Usado para realizar às mudanças de skins dos personagens
+
+    public int[] precoCharacter; 
+
     private MeshFilter meshPersonagem; // Usado para trabalhar com malhas
     private int idPersonagem; // Os ids determinam qual personagem foi escolhido
 
@@ -36,16 +39,22 @@ public class Manager : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        player = FindObjectOfType(typeof(PlayerController)) as PlayerController;
+        PlayerPrefs.SetInt("Personagem0", 1); // Gravando o uso da skin do personage 0
+        moedas = PlayerPrefs.GetInt("moedas"); // Captura à quantidade de moedas que foram armazenadas anteriormente
+        moedasTxt.text = moedas.ToString(); // Atualiza o quantitativo de moedas no Hud
+        playerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
 
-        meshPersonagem = player.GetComponentInChildren<MeshFilter>(); // Acessando o Mesh Filter do personagem
+        meshPersonagem = playerController.GetComponentInChildren<MeshFilter>(); // Acessando o Mesh Filter do personagem
 
         // Captura o id que vinculado à skim que foi salva anteriormente, no momento de escolha das skins
         idPersonagem = PlayerPrefs.GetInt("idPersonagemAtual");
 
         meshPersonagem.mesh = skimPersonagem[idPersonagem]; // Seta uma nova skim para o personagem
+        // Mostra o valor dos personagens de acordo com o idPersonagem
+        precoPersonagemTxt.text = precoCharacter[idPersonagem].ToString();
 
-        print("Início do Switch!");
+
+        print("Início do Switch!" + precoCharacter[idPersonagem].ToString());
         switch (currentState) {
             
             case GameState.TITULO:
@@ -78,9 +87,27 @@ public class Manager : MonoBehaviour {
 
             if (Input.GetKeyDown(KeyCode.Return)) { // Se o botão ENTRE for clicado
 
-                hudLoading.SetActive(true); // Ativa a tela de loading
-                // Carrega a cena principal do game
-                SceneManager.LoadSceneAsync("ScenePrincipal");
+                if (PlayerPrefs.GetInt("Personagem" + idPersonagem.ToString()) == 1) {
+
+                    hudLoading.SetActive(true); // Ativa a tela de loading
+                    // Carrega a cena principal do game
+                    SceneManager.LoadSceneAsync("ScenePrincipal");
+                } else {
+                    if(moedas >= precoCharacter[idPersonagem]) {
+
+                        PlayerPrefs.SetInt("Personagem" + idPersonagem.ToString(), 1);
+                        moedas -= precoCharacter[idPersonagem];
+                        PlayerPrefs.SetInt("moedas", moedas);
+
+                        // Grava internamente o valor inteiro passado na variável chamada idPersonagemAtual
+                        PlayerPrefs.SetInt("idPersonagemAtual", idPersonagem);
+
+                        hudLoading.SetActive(true); // Ativa a tela de loading
+                        // Carrega a cena principal do game
+                        SceneManager.LoadSceneAsync("ScenePrincipal");
+                    }
+                }
+                
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow)) {
@@ -100,7 +127,7 @@ public class Manager : MonoBehaviour {
         yield return new WaitForSeconds(1);
         tempo -= 1;
         if(tempo == 0) {
-            player.gotHit(); // Chama função do script PlayerController
+            playerController.gotHit(); // Chama função do script PlayerController
             gameOver();
         }
 
@@ -116,6 +143,7 @@ public class Manager : MonoBehaviour {
 
         moedas += valor;
         moedasTxt.text = moedas.ToString();
+        PlayerPrefs.SetInt("moedas", moedas); // Gravando às moedas que foram pegas no game
         moedasColetadas += 1;
     }
     
@@ -166,9 +194,19 @@ public class Manager : MonoBehaviour {
         else if(idPersonagem < 0) { idPersonagem = skimPersonagem.Length - 1; }
 
         meshPersonagem.mesh = skimPersonagem[idPersonagem];
+      
+        // Mostra o valor dos personagens de acordo com o idPersonagem
+        precoPersonagemTxt.text = precoCharacter[idPersonagem].ToString();
+        // Verificar se temos o personagem para exibir o Hud Loja
 
-        // Grava internamente o valor inteiro passado na variável chamada idPersonagemAtual
-        PlayerPrefs.SetInt("idPersonagemAtual", idPersonagem);
+        if(PlayerPrefs.GetInt("Personagem" + idPersonagem.ToString()) == 0) {
+
+            hudLoja.SetActive(true);
+        } else {
+            hudLoja.SetActive(false);
+            // Grava internamente o valor inteiro passado na variável chamada idPersonagemAtual
+            PlayerPrefs.SetInt("idPersonagemAtual", idPersonagem);
+        }
         
     }
 
