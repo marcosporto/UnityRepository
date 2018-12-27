@@ -18,12 +18,22 @@ public class PlayerController : MonoBehaviour {
     public bool     jumpStart;      // Indica o início do pulo
     public bool     isJumping;      // Indica se o personagem está pulando
 
-    public Vector3 target;          // Armazena o destino do movimento          
+    public Vector3 target;          // Armazena o destino do movimento
+
+    [Header("Audios")]              // Separação para opçoes dentro o Inspector
+    public AudioClip audioIdle1;
+    public AudioClip audioIdle2;
+    public AudioClip audioHop;
+    public AudioClip audioHit;
+    public AudioClip audioSplash;
+    public AudioClip audioCoin;
+    private AudioSource tocarSom;
 
 
     public void Start() {
 
         manager = FindObjectOfType(typeof(Manager)) as Manager;     // Objeto recebendo referência para acessar o Manager e seus méodos
+        tocarSom = GetComponent<AudioSource>(); // Capturando o AudioSource 
     }
 
     void Update () {
@@ -46,6 +56,9 @@ public class PlayerController : MonoBehaviour {
             if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) {
 
                 checkIfCanMove();
+                tocarSom.volume = 1; // Atribui um volume máximo que é igual a um
+                // Toca um Audio Clip corrente, mesmo que outro Audio Clip seja chamado
+                tocarSom.PlayOneShot(audioIdle1);
             }
         }
     }
@@ -117,7 +130,9 @@ public class PlayerController : MonoBehaviour {
                 jumpStart = false;
                 isJumping = true;
                 isMoving = true; // Define que o movimento do player pode ser executado
-                isCanMove = false; // Desabilita método que vai capturar tecla direcional clicada 
+                isCanMove = false; // Desabilita método que vai capturar tecla direcional clicada
+                tocarSom.volume = 1; // Atribui um volume máximo que é igual a um
+                tocarSom.PlayOneShot(audioIdle2); // Toca som quando o personagem pula
             }
         }
     }
@@ -146,6 +161,7 @@ public class PlayerController : MonoBehaviour {
     // Chamada quando o personagem morre
     public void gotHit() {
         isDead = true;
+        tocarSom.PlayOneShot(audioHit); // Audio é tocado quando o personagem morre
         playerAnimator.SetBool("dead", isDead); // Realiza a animação de morte, e abaixo chama a tela de game over
         manager.gameOver();
     }
@@ -171,12 +187,16 @@ public class PlayerController : MonoBehaviour {
             case "moeda":
                 print("Peguei uma moeda!");
                 manager.atualizarMoedas(1);
+                tocarSom.volume = 0.5f; // Atribui um volume médio que é igual a 0.5
+                tocarSom.PlayOneShot(audioCoin); // Toca o som quando o pesonagem pega a moeda
                 Destroy(coliderDoObjetoCorrente.gameObject);
                 break;
 
             case "tomate":
                 print("Peguei um tomate!");
                 manager.atualizarTempo(5);
+                tocarSom.volume = 0.5f; // Atribui um volume médio que é igual a 0.5
+                tocarSom.PlayOneShot(audioCoin); // Toca o som quando o pesonagem pega o tomate
                 Destroy(coliderDoObjetoCorrente.gameObject);
                 break;
 
