@@ -53,12 +53,57 @@ public class ProceduralMap : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start() {
+
+        montarMapa();
+
+    }
+
+    public void montarMapa() {
+
+        int idBloco = 0; // Valor inicial zero
+        int meio = blocosLinha / 2; // Meio dos blocos
+        float posicaoXInicial = (meio * tamanhoBloco) * -1; // Posiciona os blocos para à esquerda
+        float posicaoZInicial = (quantidadeLimitadores * tamanhoBloco) * -1;
+
+        for(int linha = 0; linha < quantidadeDeLinhas; linha++) {
+
+            gerarLinha(blocoPrefab[idBloco], meio, posicaoXInicial, ocupaBloco[idBloco], temDecoracao[idBloco], temColetavel[idBloco], !temDecoracao[idBloco], idBloco);
+        }
+
+
+
+    }
+    public void gerarLinha(GameObject blocoPrefab, int meio, float posicaoXInicial, int ocupaBlocos,
+                           bool decoravel, bool coletavel, bool spawn, int idBloco) {
+
+
+        Vector3 posicaoBloco = Vector3.zero;
+
+        for(int blocoAtual = 0; blocoAtual <= blocosLinha; blocoAtual++) {
+
+
+
+        }
+
+        print("Passou pelo gera linha!!");
+
+    }
+
+    public void gerarLinhaInicialFinal() {
+
+    }
+
+    public void inserirDecoracoa() {
+
+    }
+
+    public void inserirColetavel() {
+
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void inserirSpawn() {
+
+    }
+	
 }

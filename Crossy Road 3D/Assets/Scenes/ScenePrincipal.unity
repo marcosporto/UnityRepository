@@ -1774,37 +1774,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f8f8ca28959cc4d8d01359a3b1095e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tamanhoBloco: 0
-  blocoPrefab: []
-  ocupaBloco: 
-  temDecoracao: 
-  temColetavel: 
-  idBlocoAgua: 0
+  tamanhoBloco: 20
+  blocoPrefab:
+  - {fileID: 1722826413724604, guid: 5148ac769f71c4f4b92a00dde9ae7036, type: 2}
+  - {fileID: 1346746193129482, guid: 6fec5da4a72a9204cb9f20eba95aa6f2, type: 2}
+  - {fileID: 1333169431754830, guid: ea11912fb01268745b0b36439f417a63, type: 2}
+  - {fileID: 1821639456516962, guid: f7489abf1b4530a49895268b9a948af7, type: 2}
+  - {fileID: 1525200347922952, guid: 40a05415997150547b333d122c562cb8, type: 2}
+  ocupaBloco: 0100000001000000020000000300000001000000
+  temDecoracao: 0100000000
+  temColetavel: 0101010101
+  idBlocoAgua: 4
   spawnAguaLado: 0
-  blocoChegada: {fileID: 0}
+  blocoChegada: {fileID: 1197860155402496, guid: 78b766a9f3e9de84f85349a1e6426c2e,
+    type: 2}
   blocoLimitador: {fileID: 0}
-  spawnPrefab: {fileID: 0}
+  spawnPrefab: {fileID: 1084020038660712, guid: 5352b0a0011ef7e439ffc2b8932821ca,
+    type: 2}
   linhaCena: 0
-  blocosLinha: 0
-  quantidadeDeLinhas: 0
-  quantidadeLinhasInicioFim: 0
-  quantidadeLimitadores: 0
-  decoracaoPrefab: []
-  coletavelPrefab: []
-  nomeColetavel: []
-  chanceDecoracao: 0
-  prioridadeColetavel: 0
-  chanceColetavel: 0
+  blocosLinha: 10
+  quantidadeDeLinhas: 10
+  quantidadeLinhasInicioFim: 3
+  quantidadeLimitadores: 5
+  decoracaoPrefab:
+  - {fileID: 1978563136273008, guid: 0b20685904437b84699fc3e83515c7ba, type: 2}
+  coletavelPrefab:
+  - {fileID: 1483604452517414, guid: 6ca8f8f153d75c34eb5c5e096dfa95a5, type: 2}
+  - {fileID: 1223370931244258, guid: 7bd3cf36bc103684e83f52df8f1745e5, type: 2}
+  nomeColetavel:
+  - Moeda
+  - Tomate
+  chanceDecoracao: 15
+  prioridadeColetavel: 35
+  chanceColetavel: 15
   bloco0: []
   bloco1: []
   bloco2: []
   bloco3: []
   bloco4: []
   bloco5: []
-  blocosJogaveis: {fileID: 0}
-  blocosLimitadores: {fileID: 0}
-  blocosDecoracao: {fileID: 0}
-  blocosColetaveis: {fileID: 0}
+  blocosJogaveis: {fileID: 1220642724}
+  blocosLimitadores: {fileID: 129737884}
+  blocosDecoracao: {fileID: 427188362}
+  blocosColetaveis: {fileID: 4394826}
 --- !u!1 &1164114260
 GameObject:
   m_ObjectHideFlags: 0
