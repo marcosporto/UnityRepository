@@ -66,12 +66,26 @@ public class ProceduralMap : MonoBehaviour {
         int meio = blocosLinha / 2; // Meio dos blocos, usado para calcular os blocos que vão para direita e esquerda
         float posicaoXInicial = (meio * tamanhoBloco) * -1; // Valor usado para posicionar os blocos no eixo X a partir da esquerda
         float posicaoZInicial = (quantidadeLimitadores * tamanhoBloco) * -1;
-        // 
-        for(int linha = 0; linha < quantidadeDeLinhas; linha++) {
+
+        // GERA AS LINHAS INICIAIS DO MAPA
+        for (int linha = 0; linha < quantidadeLinhasInicioFim; linha++) {
+            
+            // Bloco que gera decoração não pode ter Spawn, aplicado à seguinte variável de parâmetro: !temDecoracao[idBloco]
+            gerarLinha(blocoPrefab[idBloco], meio, posicaoXInicial, ocupaBloco[idBloco], temDecoracao[idBloco], temColetavel[idBloco], !temDecoracao[idBloco], idBloco);
+        }
+
+        // GERA AS LINHAS JOGÁVEIS DO MAPA
+        for (int linha = 0; linha < quantidadeDeLinhas; linha++) {
 
             idBloco = Random.Range(0, blocoPrefab.Length);  // Gera um valor randômico para criar linhas de objetos diferentes no mapa
             // Bloco que gera decoração não pode ter Spawn, aplicado à seguinte variável de parâmetro: !temDecoracao[idBloco]
             gerarLinha(blocoPrefab[idBloco], meio, posicaoXInicial, ocupaBloco[idBloco], temDecoracao[idBloco], temColetavel[idBloco], !temDecoracao[idBloco], idBloco);
+        }
+        // GERA AS LINHAS FINAIS DO MAPA
+        for (int linha = 0; linha < quantidadeLinhasInicioFim; linha++) {
+
+            // Bloco que gera decoração não pode ter Spawn, aplicado à seguinte variável de parâmetro: !temDecoracao[idBloco]
+            gerarLinha(blocoChegada, meio, posicaoXInicial, 1, false, false, false, 1);
         }
 
 
@@ -86,8 +100,8 @@ public class ProceduralMap : MonoBehaviour {
 
         for(int blocoAtual = 0; blocoAtual <= blocosLinha; blocoAtual++) {
 
-            // Armazena a posição do bloco que for inserido. 
-            posicaoBloco = new Vector3(posicaoXInicial + (tamanhoBloco * blocoAtual), blocoPrefab.transform.position.y, tamanhoBloco * linhaCena);
+            // Armazena a posição do bloco que for inserido. O elemento blocoPrefab.transform.position.z traz o valor da posição prévia do eixo Z do prefab selecionado
+            posicaoBloco = new Vector3(posicaoXInicial + (tamanhoBloco * blocoAtual), blocoPrefab.transform.position.y, blocoPrefab.transform.position.z + (tamanhoBloco * linhaCena));
             // Instância um bloco na cena e vincula esse bloco a uma hirearquia chamada Blocos Jogaveis no Mapa.
             Instantiate(blocoPrefab, posicaoBloco, blocoPrefab.transform.rotation, blocosJogaveis);
         }
