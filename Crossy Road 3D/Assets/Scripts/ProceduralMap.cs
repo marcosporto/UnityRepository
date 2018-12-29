@@ -59,7 +59,7 @@ public class ProceduralMap : MonoBehaviour {
 
     }
 
-    // FUNÇÃO INICIAL PARA MONTAGEM DO MAPA
+    // FUNÇÃO INICIAL PARA MONTAGEM DO MAPAA
     public void montarMapa() {
 
         int idBloco = 0; // Identifica qual o bloco será usado
