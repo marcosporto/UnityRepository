@@ -59,42 +59,50 @@ public class ProceduralMap : MonoBehaviour {
 
     }
 
+    // FUNÇÃO INICIAL PARA MONTAGEM DO MAPA
     public void montarMapa() {
 
-        int idBloco = 0; // Valor inicial zero
-        int meio = blocosLinha / 2; // Meio dos blocos
-        float posicaoXInicial = (meio * tamanhoBloco) * -1; // Posiciona os blocos para à esquerda
+        int idBloco = 0; // Identifica qual o bloco será usado
+        int meio = blocosLinha / 2; // Meio dos blocos, usado para calcular os blocos que vão para direita e esquerda
+        float posicaoXInicial = (meio * tamanhoBloco) * -1; // Valor usado para posicionar os blocos no eixo X a partir da esquerda
         float posicaoZInicial = (quantidadeLimitadores * tamanhoBloco) * -1;
-
+        // 
         for(int linha = 0; linha < quantidadeDeLinhas; linha++) {
 
+            idBloco = Random.Range(0, blocoPrefab.Length);  // Gera um valor randômico para criar linhas de objetos diferentes no mapa
+            // Bloco que gera decoração não pode ter Spawn, aplicado à seguinte variável de parâmetro: !temDecoracao[idBloco]
             gerarLinha(blocoPrefab[idBloco], meio, posicaoXInicial, ocupaBloco[idBloco], temDecoracao[idBloco], temColetavel[idBloco], !temDecoracao[idBloco], idBloco);
         }
 
 
 
     }
+    // FUNÇÃO USADA POR GERAR ÀS LINHAS COM OS BLOCOS DE OBJETOS
     public void gerarLinha(GameObject blocoPrefab, int meio, float posicaoXInicial, int ocupaBlocos,
                            bool decoravel, bool coletavel, bool spawn, int idBloco) {
 
 
-        Vector3 posicaoBloco = Vector3.zero;
+        Vector3 posicaoBloco = Vector3.zero;    // Declaração do posição inicial zerada
 
         for(int blocoAtual = 0; blocoAtual <= blocosLinha; blocoAtual++) {
 
-
-
+            // Armazena a posição do bloco que for inserido. 
+            posicaoBloco = new Vector3(posicaoXInicial + (tamanhoBloco * blocoAtual), blocoPrefab.transform.position.y, tamanhoBloco * linhaCena);
+            // Instância um bloco na cena e vincula esse bloco a uma hirearquia chamada Blocos Jogaveis no Mapa.
+            Instantiate(blocoPrefab, posicaoBloco, blocoPrefab.transform.rotation, blocosJogaveis);
         }
 
-        print("Passou pelo gera linha!!");
+        linhaCena += ocupaBloco[idBloco];   // Determina o tamanho da linha, usando como referência a quantidade de blocos ocupados por cada objeto
+
+        
 
     }
-
+    // FUNÇÃO USADA POR GERAR À LINHA INICIAL E FINAL DO MAPA
     public void gerarLinhaInicialFinal() {
 
     }
 
-    public void inserirDecoracoa() {
+    public void inserirDecoracao() {
 
     }
 
