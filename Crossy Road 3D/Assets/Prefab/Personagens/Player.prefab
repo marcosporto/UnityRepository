@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4296870044632740}
   - component: {fileID: 54163562471074068}
   - component: {fileID: 65882951289089864}
+  - component: {fileID: 114143693796689522}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -52,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1394150002939302}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4993069046613726}
@@ -141,3 +142,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12, y: 12, z: 12}
   m_Center: {x: 0, y: 6, z: 0}
+--- !u!114 &114143693796689522
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1394150002939302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fc43e0a147610749a61d249f3bbeaaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAnimator: {fileID: 0}
+  moveDistance: 20
+  moveSpeed: 1.5
+  isIdle: 0
+  isDead: 0
+  isMove: 0
+  jumpStart: 0
+  isJumping: 0
+  target: {x: 0, y: 20, z: 0}
