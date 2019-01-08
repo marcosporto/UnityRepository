@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
     public float    moveSpeed;      // Velocidade do movimento
     public bool     isIdle;         // Indica se o personagem está parado
     public bool     isDead;         // Indica se o personagem está morto
-    public bool     isMoving;         // Indica se o personagem está se movendo
+    public bool     isMoving;       // Indica se o personagem está se movendo
     public bool     jumpStart;      // Indica o início do pulo
     public bool     isJumping;      // Indica se o personagem está pulando
 
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 
         canIdle();
         CanMove();
-        Moving(target);
+        Moving();
 	}
 
     void canIdle() {
@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    // Método que verifica se o personagem pode se mover
     void checkIfCanMove() {
 
         // Fazer o teste de reyCaste para verificar possíveis obstáculos
@@ -83,13 +84,28 @@ public class PlayerController : MonoBehaviour {
                 target = new Vector3(transform.position.x + moveDistance, transform.position.y, transform.position.z);
             }
             print("Pode Mover");
+            //isIdle = true;
+            //isMoving = false;
         }
     }
 
     // Método responsável por setar o movimento do player
-    void Moving(Vector3 target) {
+    void Moving() {
+        // Se a variável isMoving for true, execute o movimento
+        if (isMoving) {
+            // Realiza o movimento do player de um ponto ao outro
+            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
 
-        // Realiza o movimento do player de um ponto ao outro
-        transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
+            // Verifica se o player já chegou na posição de destino
+            if (transform.position == target) {
+                MoveComplete();
+            } 
+        }
+    }
+
+    void MoveComplete() {
+
+        isIdle = true;
+        isMoving = false;
     }
 }
