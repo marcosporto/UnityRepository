@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    // Variável usada para acessar o Manager.cs
+    private Manager manager;        // Objeto que vai setar valores dentro do script Manager
+
     public Animator playerAnimator;
 
     public float    moveDistance;   // Distância a ser movida
@@ -17,7 +20,15 @@ public class PlayerController : MonoBehaviour {
 
     public Vector3 target;          // Armazena o destino do movimento          
 
+
+    public void Start() {
+
+        manager = FindObjectOfType(typeof(Manager)) as Manager;     // Objeto recebendo referência para acessar o Manager e seus méodos
+    }
+
     void Update () {
+
+        if(manager.currentState != GameState.GAMEMPLAY) { return; }
 
         AnimatorController(); 
         canIdle();
@@ -133,8 +144,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Chamada quando o personagem morre
-    void gotHit() {
+    public void gotHit() {
         isDead = true;
+        playerAnimator.SetBool("dead", isDead); // Realiza a animação de morte, e abaixo chama a tela de game over
+        manager.gameOver();
     }
 
     void AnimatorController() {
@@ -157,11 +170,13 @@ public class PlayerController : MonoBehaviour {
         switch (coliderDoObjetoCorrente.tag) {
             case "moeda":
                 print("Peguei uma moeda!");
+                manager.atualizarMoedas(1);
                 Destroy(coliderDoObjetoCorrente.gameObject);
                 break;
 
             case "tomate":
                 print("Peguei um tomate!");
+                manager.atualizarTempo(5);
                 Destroy(coliderDoObjetoCorrente.gameObject);
                 break;
 
