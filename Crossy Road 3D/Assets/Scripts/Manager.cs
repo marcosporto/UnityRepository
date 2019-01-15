@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using UnityEngine.SceneManagement; // Necessário para trabalhar com o objeto scene
+
 // Máquina de estado
 public enum GameState {
 
@@ -57,6 +59,16 @@ public class Manager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if(currentState == GameState.TITULO) { // Se o estado corrente dor TITULO
+
+            if (Input.GetKeyDown(KeyCode.Return)) { // Se o botão ENTRE for clicado
+
+                hudLoading.SetActive(true); // Ativa a tela de loading
+                // Carrega a cena principal do game
+                SceneManager.LoadSceneAsync("ScenePrincipal");
+            }
+        }
 		
 	}
 
@@ -99,6 +111,30 @@ public class Manager : MonoBehaviour {
         currentState = GameState.GAMEOVER;
         hudInfoGamePlay     .SetActive(false);   
         hudGameOver         .SetActive(true);   // Chama a tela de game over
+    }
+
+    public void jogarNovamente() {
+
+        hudLoading.SetActive(true); // Mostra à cena de Loading antes de carregar à cena abaixo
+        // Captura o nome da cena ativa
+        // A cena é carregada em backgroud, ou seja, a nova cena é exibida somente quando for finalizado o seu carregamento
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadSceneAsync("ScenePrincipal"); // A cena é carregada em backgroud, ou seja, a nova cena é exibida somente quando for finalizado o carregamento
+        //SceneManager.LoadScene("ScenePrincipal");   // Faz a carga da scene passada como parâmetro instantaneamente
+
+    }
+
+    public void voltarTitulo() {
+
+        hudLoading.SetActive(true); // Ativa a tela de loading
+        // Carrega a cena chamda TITULO
+        SceneManager.LoadSceneAsync("Titulo");
+    }
+
+    public void sair() {
+
+        // Fecha a aplicação
+        Application.Quit();
     }
 
 
