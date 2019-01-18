@@ -8,23 +8,23 @@ public class ProceduralMap : MonoBehaviour {
 
     [Header("Configurações dos Blocos no Cenário")]
 
-    public int tamanhoBloco;            // Determina o tamanho do bloco
-    public GameObject[] blocoPrefab;    // Armazena os blocos de grama, estrada etc.
-    public int[] ocupaBloco;            // Quantidade de blocos necessário para criar uma estrada dupla (2 blocos), um trilho de trem (3 blocos)
-    public bool[] temDecoracao;         // Determina em que bloco pode ter uma decoração
-    public bool[] temColetavel;         // Determina em que bloco pode ter um objeto coletável
-    public int idBlocoAgua;             // Usado para quando for gerado 2 águas na cena uma vem da direita e outra da esquerda
-    public bool spawnAguaLado;          // Determina de que lado a água foi spawnada
-    public GameObject blocoChegada;     // Determina o final do game
-    public GameObject blocoLimitador;   // Determina que esse bloco seja um limitador do cenário
-    public GameObject spawnPrefab;      // Determina qual bloco terá spawn
-    public int linhaCena;               // Controla quantas linhas de objetos está sendo inserida na cena
+    public int tamanhoBloco;                // Determina o tamanho do bloco
+    public GameObject[] blocoPrefab;        // Armazena os blocos de grama, estrada etc.
+    public int[] ocupaBloco;                // Quantidade de blocos necessário para criar uma estrada dupla (2 blocos), um trilho de trem (3 blocos)
+    public bool[] temDecoracao;             // Determina em que bloco pode ter uma decoração
+    public bool[] temColetavel;             // Determina em que bloco pode ter um objeto coletável
+    public int idBlocoAgua;                 // Usado para quando for gerado 2 águas na cena uma vem da direita e outra da esquerda
+    public bool spawnAguaLado;              // Determina de que lado a água foi spawnada
+    public GameObject blocoChegada;         // Determina o final do game
+    public GameObject blocoLimitador;       // Determina que esse bloco seja um limitador do cenário
+    public GameObject spawnPrefab;          // Determina qual bloco terá spawn
+    public int linhaCena;                   // Controla quantas linhas de objetos está sendo inserida na cena
 
     [Header("Configuração do Mapa")]
-    public int blocosLinha;             // Determina quantos blocos será inserido em cada linha. Use número par
-    public int quantidadeDeLinhas;      // Determina quantas linhas serão inseridas na cena, independente de quantos blocos são necessários para formá-las
-    public int quantidadeLinhasInicioFim; // Determina quantas linhas de grama serão geradas no inínio e no final
-    public int quantidadeLimitadores;   // Dermina quantos blocos limitadores serão gerados
+    public int blocosLinha;                 // Determina quantos blocos será inserido em cada linha. Use número par
+    public int quantidadeDeLinhas;          // Determina quantas linhas serão inseridas na cena, independente de quantos blocos são necessários para formá-las
+    public int quantidadeLinhasInicioFim;   // Determina quantas linhas de grama serão geradas no inínio e no final
+    public int quantidadeLimitadores;       // Dermina quantos blocos limitadores serão gerados
 
     [Header("Blocos de Decorações")]
     public GameObject[] decoracaoPrefab;    //Armazena os prefabs de decoração
@@ -35,7 +35,7 @@ public class ProceduralMap : MonoBehaviour {
     public int prioridadeColetavel;         // Determina se primeiro será inserido uma decoração ou um coletável
     public int chanceColetavel;             // Determina se vai ter a moeda ou não
 
-    [Header("Objetos Spawn")]               // Armazena os objetos que serão spawnados
+    [Header("Objetos Spawn")]               // Armazena os objetos que serão spawnados no mapa
     public GameObject[] bloco0;
     public GameObject[] bloco1;
     public GameObject[] bloco2;
@@ -61,7 +61,7 @@ public class ProceduralMap : MonoBehaviour {
 
     public void montarMapa() {
 
-        int idBloco = 0; // Valor inicial zero
+        int idBloco = 0; // Variável contadora para inserção dos blocos no game
         int meio = blocosLinha / 2; // Meio dos blocos
         float posicaoXInicial = (meio * tamanhoBloco) * -1; // Posiciona os blocos para à esquerda
         float posicaoZInicial = (quantidadeLimitadores * tamanhoBloco) * -1;
