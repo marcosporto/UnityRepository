@@ -8,7 +8,7 @@ public class TouchMudaCor : MonoBehaviour
     private Vector2 posicaoInicial, posicaoFinal, direcao;
     private float touchTempoInical, touchTempoFinal, intervaloTempo;
 
-    private SwipeManeger 
+   
 
 
     Rigidbody corpoRigido; // Cria uma referência para acessar o Rigidbody 
