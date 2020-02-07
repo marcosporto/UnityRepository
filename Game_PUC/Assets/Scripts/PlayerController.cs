@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         posicaoDoPlayer = transform.position;
         posicaoDoPlayer.x += velocidadeDoPlayer * Input.GetAxis("Horizontal") * Time.deltaTime;
-        posicaoDoPlayer.y += velocidadeDoPlayer * Input.GetAxis("Vertical") * Time.deltaTime;
+        posicaoDoPlayer.z += velocidadeDoPlayer * Input.GetAxis("Vertical") * Time.deltaTime;
         transform.position = posicaoDoPlayer;
     }
 }
