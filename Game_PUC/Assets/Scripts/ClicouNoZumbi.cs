@@ -16,13 +16,13 @@ public class ClicouNoZumbi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(0, 0, -1) * Time.deltaTime,Space.World);
+        transform.Translate(new Vector3(0, 0, -6) * Time.deltaTime,Space.World);
         //multiplicar por Time.deltatime
         
     }
     private void OnMouseDown()
     {
-        if (transform.position.z < -15 && transform.position.z > -25)
+        if (transform.position.z < -20 && transform.position.z > -30)
         {
             Debug.Log("Clicou no mouse!!!");
             Destroy(gameObject);
