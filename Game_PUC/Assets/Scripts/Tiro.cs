@@ -11,9 +11,9 @@ public class Tiro : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Touch touch = Input.GetTouch(0);
+        //Touch touch = Input.GetTouch(0);
 
-        if (Input.GetKeyDown(KeyCode.Space) || touch.phase == 0)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
 
             if (!IsInvoking("InstantiateMunicao")) {
@@ -21,7 +21,7 @@ public class Tiro : MonoBehaviour
                 InvokeRepeating("InstantiateMunicao", 0f, 1f);
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space) || touch.phase == 0) {
+        if (Input.GetKeyUp(KeyCode.Space)) {
 
             CancelInvoke("InstantiateMunicao");
         }

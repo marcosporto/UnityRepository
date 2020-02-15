@@ -704,10 +704,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: bd101e35-2539-4c0d-8bb0-62eaf7a30731
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: "Teste da aplica\xE7\xE3o"
+  organizationId: marcosporto
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
