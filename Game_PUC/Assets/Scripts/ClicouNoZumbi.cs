@@ -9,7 +9,7 @@ public class ClicouNoZumbi : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        zumbi = GameObject.FindWithTag("AreaDeClique");
+        //zumbi = GameObject.FindWithTag("AreaDeClique");
         
     }
 
@@ -20,7 +20,7 @@ public class ClicouNoZumbi : MonoBehaviour
         //multiplicar por Time.deltatime
         
     }
-    private void OnMouseDown()
+    /*private void OnMouseDown()
     {
         if (transform.position.z < -20 && transform.position.z > -30)
         {
@@ -29,5 +29,5 @@ public class ClicouNoZumbi : MonoBehaviour
         }
        //
         
-    }
+    }*/
 }

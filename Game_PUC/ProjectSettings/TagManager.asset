@@ -6,6 +6,7 @@ TagManager:
   tags:
   - municao
   - AreaDeClique
+  - Zumbi
   layers:
   - Default
   - TransparentFX
