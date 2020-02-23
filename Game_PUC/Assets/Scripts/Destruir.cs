@@ -6,22 +6,46 @@ public class Destruir : MonoBehaviour
 {
     public Touch touch;
     public float velocidadeDaMira;
+    public float velocidadeMunicao = 10f;
+    public GameObject zumbi;
+    public Transform posicaoA;
+    public Transform posicaoB;
+
 
     private void Start()
     {
-        velocidadeDaMira = 0.5f;
+        velocidadeDaMira = 100f;
     }
 
     private void Update()
     {
-        if(Input.touchCount > 0)
+      /*  if (Input.GetMouseButtonDown(0))
+        { 
+       
+            Debug.Log("Instanciou!!!!");
+            GameObject municaoTemporaria = Instantiate(zumbi) as GameObject;
+            municaoTemporaria.transform.position = posicaoA.position;
+            municaoTemporaria.GetComponent<Rigidbody>().velocity = transform.parent.forward * velocidadeMunicao;
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+
+            Debug.Log("Instanciou!!!!");
+            GameObject municaoTemporaria = Instantiate(zumbi) as GameObject;
+            municaoTemporaria.transform.position = posicaoB.position;
+            municaoTemporaria.GetComponent<Rigidbody>().velocity = transform.parent.forward * velocidadeMunicao;
+        }*/
+
+
+        if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
 
             if(touch.phase == TouchPhase.Moved)
             {
                 transform.position = new Vector3(
-                    Mathf.Clamp(transform.position.x + touch.deltaPosition.x * velocidadeDaMira, -5.81f, 6.57f),
+                    Mathf.Clamp(transform.position.x + touch.deltaPosition.x * velocidadeDaMira * Time.deltaTime, -5.81f, 6.57f),
                     transform.position.y,
                     transform.position.z);
 
