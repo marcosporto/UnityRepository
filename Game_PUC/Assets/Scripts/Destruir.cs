@@ -21,11 +21,14 @@ public class Destruir : MonoBehaviour
             if(touch.phase == TouchPhase.Moved)
             {
                 transform.position = new Vector3(
-                    transform.position.x + touch.deltaPosition.x * velocidadeDaMira,
+                    Mathf.Clamp(transform.position.x + touch.deltaPosition.x * velocidadeDaMira, -5.81f, 6.57f),
                     transform.position.y,
                     transform.position.z);
+
+                
             }
         }
+        
 
        // for (int i = 0; i < Input.touchCount; i++)
        // {
