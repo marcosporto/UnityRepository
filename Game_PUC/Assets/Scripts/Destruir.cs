@@ -6,36 +6,46 @@ public class Destruir : MonoBehaviour
 {
     public Touch touch;
     public float velocidadeDaMira;
-    public float velocidadeMunicao = 10f;
+    public float velocidadeMunicao = 1f;
     public GameObject zumbi;
     public Transform posicaoA;
     public Transform posicaoB;
+    private GameObject municaoTemporaria;
 
 
     private void Start()
     {
-        velocidadeDaMira = 100f;
+        velocidadeDaMira = 1000;
     }
 
     private void Update()
     {
-      /*  if (Input.GetMouseButtonDown(0))
+        
+        if (Input.GetMouseButtonDown(0))
         { 
        
             Debug.Log("Instanciou!!!!");
-            GameObject municaoTemporaria = Instantiate(zumbi) as GameObject;
+            municaoTemporaria = Instantiate(zumbi) as GameObject;
             municaoTemporaria.transform.position = posicaoA.position;
-            municaoTemporaria.GetComponent<Rigidbody>().velocity = transform.parent.forward * velocidadeMunicao;
+            
+            //municaoTemporaria.GetComponent<Rigidbody>().AddForce(0, 0, velocidadeMunicao * Time.deltaTime);
+        }
+        if (municaoTemporaria != null)
+        {
+            //municaoTemporaria.GetComponent<Rigidbody>().AddForce(0, 0, velocidadeMunicao * Time.deltaTime);
+            municaoTemporaria.transform.position = new Vector3(
+                municaoTemporaria.transform.position.x,
+                municaoTemporaria.transform.position.y,
+                municaoTemporaria.transform.position.z + velocidadeMunicao * Time.deltaTime);
         }
 
-        if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1))
         {
 
             Debug.Log("Instanciou!!!!");
-            GameObject municaoTemporaria = Instantiate(zumbi) as GameObject;
+            municaoTemporaria = Instantiate(zumbi) as GameObject;
             municaoTemporaria.transform.position = posicaoB.position;
-            municaoTemporaria.GetComponent<Rigidbody>().velocity = transform.parent.forward * velocidadeMunicao;
-        }*/
+        }
 
 
         if (Input.touchCount > 0)
@@ -44,6 +54,8 @@ public class Destruir : MonoBehaviour
 
             if(touch.phase == TouchPhase.Moved)
             {
+                //Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+
                 transform.position = new Vector3(
                     Mathf.Clamp(transform.position.x + touch.deltaPosition.x * velocidadeDaMira * Time.deltaTime, -5.81f, 6.57f),
                     transform.position.y,
