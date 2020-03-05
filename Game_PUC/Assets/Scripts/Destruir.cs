@@ -10,20 +10,22 @@ public class Destruir : MonoBehaviour
     public GameObject zumbi;
     public Transform posicaoA;
     public Transform posicaoB;
+    public GameObject particulaTiro;
     private GameObject municaoTemporaria;
-
+    
 
     private void Start()
     {
-        velocidadeDaMira = 1000;
+        velocidadeDaMira = 10;
     }
 
     private void Update()
     {
         
         if (Input.GetMouseButtonDown(0))
-        { 
-       
+        {
+            
+
             Debug.Log("Instanciou!!!!");
             municaoTemporaria = Instantiate(zumbi) as GameObject;
             municaoTemporaria.transform.position = posicaoA.position;
@@ -95,8 +97,10 @@ public class Destruir : MonoBehaviour
     {
         if(other.tag == "Zumbi")
         {
+            Transform particula = other.transform;
             Debug.Log("Clicou no botão de TIRO!!!");
-            audioDeTiro.Play();
+            Instantiate(particulaTiro, particula.gameObject.transform.position, Quaternion.identity);            
+            audioDeTiro.Play();            
             Destroy(other.gameObject);
         }
     }
